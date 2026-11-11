@@ -687,7 +687,7 @@ function pickLanguage(saved: string|null, languages: MyVoice["language"][]): str
 function VoiceLicense({voice}: {voice: MyVoice}) {
   const cardFile = Object.keys(voice.files).find(x => x.endsWith("/MODEL_CARD"))
   if (!cardFile) return null
-  const license = (voiceLicenses as Record<string, string>)[voice.key] ?? "license"
+  const license = (voiceLicenses as Record<string, string>)[voice.key] ?? "See license"
   return (
     <a target="_blank" href={config.repoUrl + cardFile} title="Voice license (model card)">{license}</a>
   )
