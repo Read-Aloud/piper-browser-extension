@@ -22,6 +22,14 @@ const OVERRIDES = {
   "sv_SE-lisa-medium": "License not stated",
   "ur_PK-aegis_female-medium": "MIT",
   "ur_PK-fasih-medium": "MIT",
+  // Cards say "See URL"; licenses read from the dataset pages.
+  "en_GB-jenny_dioco-medium": "Jenny (Dioco) license",
+  "he_IL-saspeech-medium": "SASPEECH non-commercial license",
+  "is_IS-bui-medium": "CC BY 4.0",
+  "is_IS-salka-medium": "CC BY 4.0",
+  "is_IS-steinn-medium": "CC BY 4.0",
+  "is_IS-ugla-medium": "CC BY 4.0",
+  "it_IT-paola-medium": "CC0",
 }
 
 function normalize(text) {
