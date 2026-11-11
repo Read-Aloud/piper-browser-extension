@@ -35,7 +35,14 @@ function App() {
     activityLog: React.useRef<HTMLTextAreaElement>(null!),
   }
   const installed = React.useMemo(() => state.voiceList?.filter(x => x.installState == "installed") ?? [], [state.voiceList])
-  const notInstalled = React.useMemo(() => state.voiceList?.filter(x => x.installState != "installed") ?? [], [state.voiceList])
+  const languages = React.useMemo(() => {
+    const map = new Map<string, MyVoice["language"]>()
+    for (const voice of state.voiceList ?? []) map.set(voice.language.code, voice.language)
+    return [...map.values()].sort((a, b) => languageLabel(a).localeCompare(languageLabel(b)))
+  }, [state.voiceList])
+  const [selectedLang, setSelectedLang] = React.useState(loadSelectedLang)
+  const effectiveLang = React.useMemo(() => pickLanguage(selectedLang, languages), [selectedLang, languages])
+  const notInstalled = React.useMemo(() => state.voiceList?.filter(x => x.installState != "installed" && x.language.code == effectiveLang) ?? [], [state.voiceList, effectiveLang])
   const advertised = React.useMemo(() => makeAdvertisedVoiceList(state.voiceList), [state.voiceList])
 
 
@@ -204,13 +211,26 @@ function App() {
       </div>
 
       <div>
-        <h2 className="text-muted">Available to Install</h2>
+        <div className="d-flex align-items-center flex-wrap">
+          <h2 className="text-muted me-3">Available to Install</h2>
+          {languages.length > 0 &&
+            <select className="form-select form-select-sm w-auto mb-2" aria-label="Language"
+              value={effectiveLang ?? ""}
+              onChange={event => {
+                setSelectedLang(event.target.value)
+                saveSelectedLang(event.target.value)
+              }}>
+              {languages.map(lang =>
+                <option key={lang.code} value={lang.code}>{languageLabel(lang)}</option>
+              )}
+            </select>
+          }
+        </div>
         {notInstalled.length > 0 &&
           <table className="table table-borderless table-hover table-sm">
             <thead>
               <tr>
                 <th>Voice Pack</th>
-                <th>Language</th>
                 <th>Popularity</th>
                 <th></th>
                 <th style={{width: "0%"}}></th>
@@ -241,7 +261,6 @@ function App() {
                       </ul>
                     }
                   </td>
-                  <td className="align-top">{voice.language.name_native} ({voice.language.country_english})</td>
                   <td className="align-top">
                     <div>{state.popularity[voice.key] ?? "\u00A0"}</div>
                     {state.isExpanded[voice.key] &&
@@ -620,6 +639,45 @@ function App() {
       draft.test.current = null
     })
   }
+}
+
+
+
+function languageLabel(lang: MyVoice["language"]) {
+  const label = `${lang.name_english} (${lang.country_english})`
+  return lang.name_native == lang.name_english ? label : `${label} - ${lang.name_native}`
+}
+
+function loadSelectedLang(): string|null {
+  try {
+    return localStorage.getItem("selectedLang")
+  }
+  catch {
+    return null
+  }
+}
+
+function saveSelectedLang(code: string) {
+  try {
+    localStorage.setItem("selectedLang", code)
+  }
+  catch (err) {
+    console.error(err)
+  }
+}
+
+//saved choice, else the browser's language, else English
+function pickLanguage(saved: string|null, languages: MyVoice["language"][]): string|undefined {
+  const has = (code: string) => languages.some(x => x.code == code)
+  if (saved && has(saved)) return saved
+  for (const tag of [...navigator.languages, "en-US"]) {
+    const [family, region] = tag.split("-")
+    const exact = region && languages.find(x => x.family == family && x.region.toLowerCase() == region.toLowerCase())
+    if (exact) return exact.code
+    const sameFamily = languages.find(x => x.family == family)
+    if (sameFamily) return sameFamily.code
+  }
+  return languages[0]?.code
 }
 
 
