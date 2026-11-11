@@ -1,0 +1,569 @@
+{
+  "ar_JO-kareem-low": {
+    "license": "See dataset"
+  },
+  "ar_JO-kareem-medium": {
+    "license": "See dataset"
+  },
+  "bg_BG-dimitar-medium": {
+    "license": "CC0"
+  },
+  "bn_BD-google-medium": {
+    "license": "CC BY-SA 4.0"
+  },
+  "ca_ES-upc_ona-medium": {
+    "license": "CC BY-SA 3.0 ES"
+  },
+  "ca_ES-upc_ona-x_low": {
+    "license": "CC BY-SA 3.0 ES"
+  },
+  "ca_ES-upc_pau-x_low": {
+    "license": "CC BY-SA 3.0 ES"
+  },
+  "cs_CZ-jirka-low": {
+    "license": "CC0"
+  },
+  "cs_CZ-jirka-medium": {
+    "license": "CC0"
+  },
+  "cs_CZ-kasandra-medium": {
+    "license": "CC BY 4.0"
+  },
+  "cy_GB-bu_tts-medium": {
+    "license": "CC BY"
+  },
+  "cy_GB-gwryw_gogleddol-medium": {
+    "license": "See dataset"
+  },
+  "da_DK-talesyntese-medium": {
+    "license": "CC0"
+  },
+  "de_DE-eva_k-x_low": {
+    "license": "See dataset"
+  },
+  "de_DE-karlsson-low": {
+    "license": "See dataset"
+  },
+  "de_DE-kerstin-low": {
+    "license": "CC0"
+  },
+  "de_DE-kerstin-medium": {
+    "license": "CC0"
+  },
+  "de_DE-mls-medium": {
+    "license": "CC BY 4.0"
+  },
+  "de_DE-pavoque-low": {
+    "license": "CC BY-NC-SA 4.0",
+    "nonCommercial": true
+  },
+  "de_DE-ramona-low": {
+    "license": "See dataset"
+  },
+  "de_DE-thorsten-high": {
+    "license": "CC0"
+  },
+  "de_DE-thorsten-low": {
+    "license": "CC0"
+  },
+  "de_DE-thorsten-medium": {
+    "license": "CC0"
+  },
+  "de_DE-thorsten_emotional-medium": {
+    "license": "CC0"
+  },
+  "el_GR-joy-medium": {
+    "license": "CC BY-NC 4.0",
+    "nonCommercial": true
+  },
+  "el_GR-rapunzelina-low": {
+    "license": "CC0"
+  },
+  "el_GR-rapunzelina-medium": {
+    "license": "CC0"
+  },
+  "en_GB-alan-low": {
+    "license": "See dataset"
+  },
+  "en_GB-alan-medium": {
+    "license": "See dataset"
+  },
+  "en_GB-alba-medium": {
+    "license": "CC BY 4.0"
+  },
+  "en_GB-aru-medium": {
+    "license": "CC BY 4.0"
+  },
+  "en_GB-cori-high": {
+    "license": "Public domain"
+  },
+  "en_GB-cori-medium": {
+    "license": "CC BY 4.0"
+  },
+  "en_GB-jenny_dioco-medium": {
+    "license": "See dataset"
+  },
+  "en_GB-northern_english_male-medium": {
+    "license": "CC BY-SA 4.0"
+  },
+  "en_GB-semaine-medium": {
+    "license": "CC BY-NC-SA 4.0",
+    "nonCommercial": true
+  },
+  "en_GB-southern_english_female-low": {
+    "license": "CC BY-SA 4.0"
+  },
+  "en_GB-vctk-medium": {
+    "license": "CC BY 4.0"
+  },
+  "en_US-amy-low": {
+    "license": "See dataset"
+  },
+  "en_US-amy-medium": {
+    "license": "See dataset"
+  },
+  "en_US-arctic-medium": {
+    "license": "See dataset"
+  },
+  "en_US-bryce-medium": {
+    "license": "Public domain"
+  },
+  "en_US-danny-low": {
+    "license": "See dataset"
+  },
+  "en_US-hfc_female-medium": {
+    "license": "CC BY-NC-SA 4.0",
+    "nonCommercial": true
+  },
+  "en_US-hfc_male-medium": {
+    "license": "CC BY-NC-SA 4.0",
+    "nonCommercial": true
+  },
+  "en_US-hifi_tts_92-medium": {
+    "license": "CC BY 4.0"
+  },
+  "en_US-joe-medium": {
+    "license": "CC0"
+  },
+  "en_US-john-medium": {
+    "license": "Public domain"
+  },
+  "en_US-kathleen-low": {
+    "license": "CC0"
+  },
+  "en_US-kristin-medium": {
+    "license": "Public domain"
+  },
+  "en_US-kusal-medium": {
+    "license": "See dataset"
+  },
+  "en_US-l2arctic-medium": {
+    "license": "CC BY-NC 4.0",
+    "nonCommercial": true
+  },
+  "en_US-lessac-high": {
+    "license": "Lessac Blizzard 2013",
+    "nonCommercial": true
+  },
+  "en_US-lessac-low": {
+    "license": "Lessac Blizzard 2013",
+    "nonCommercial": true
+  },
+  "en_US-lessac-medium": {
+    "license": "Lessac Blizzard 2013",
+    "nonCommercial": true
+  },
+  "en_US-libritts-high": {
+    "license": "CC BY 4.0"
+  },
+  "en_US-libritts_r-medium": {
+    "license": "CC BY 4.0"
+  },
+  "en_US-ljspeech-high": {
+    "license": "Public domain"
+  },
+  "en_US-ljspeech-medium": {
+    "license": "Public domain"
+  },
+  "en_US-mike-medium": {
+    "license": "CC0"
+  },
+  "en_US-norman-medium": {
+    "license": "Public domain"
+  },
+  "en_US-reza_ibrahim-medium": {
+    "license": "CC0"
+  },
+  "en_US-ryan-high": {
+    "license": "CC BY-NC-SA 4.0",
+    "nonCommercial": true
+  },
+  "en_US-ryan-low": {
+    "license": "CC BY-NC-SA 4.0",
+    "nonCommercial": true
+  },
+  "en_US-ryan-medium": {
+    "license": "CC BY-NC-SA 4.0",
+    "nonCommercial": true
+  },
+  "en_US-sam-medium": {
+    "license": "Apache 2.0"
+  },
+  "es_AR-daniela-high": {
+    "license": "CC BY-SA 4.0"
+  },
+  "es_ES-carlfm-x_low": {
+    "license": "Public domain"
+  },
+  "es_ES-davefx-medium": {
+    "license": "CC0"
+  },
+  "es_ES-mls_10246-low": {
+    "license": "CC BY 4.0"
+  },
+  "es_ES-mls_9972-low": {
+    "license": "CC BY 4.0"
+  },
+  "es_ES-sharvard-medium": {
+    "license": "CC BY 3.0"
+  },
+  "es_MX-ald-medium": {
+    "license": "Unlicense"
+  },
+  "es_MX-ald-x_low": {
+    "license": "Not stated"
+  },
+  "es_MX-claude-high": {
+    "license": "Apache 2.0"
+  },
+  "et_EE-news-medium": {
+    "license": "CC BY"
+  },
+  "eu_ES-antton-medium": {
+    "license": "CC BY 4.0"
+  },
+  "eu_ES-maider-medium": {
+    "license": "CC BY 4.0"
+  },
+  "fa_IR-amir-medium": {
+    "license": "CC0"
+  },
+  "fa_IR-ganji-medium": {
+    "license": "CC0"
+  },
+  "fa_IR-ganji_adabi-medium": {
+    "license": "CC0"
+  },
+  "fa_IR-gyro-medium": {
+    "license": "See dataset"
+  },
+  "fa_IR-reza_ibrahim-medium": {
+    "license": "CC0"
+  },
+  "fi_FI-harri-low": {
+    "license": "CC0"
+  },
+  "fi_FI-harri-medium": {
+    "license": "CC0"
+  },
+  "fr_FR-gilles-low": {
+    "license": "CC0"
+  },
+  "fr_FR-mls-medium": {
+    "license": "CC BY 4.0"
+  },
+  "fr_FR-mls_1840-low": {
+    "license": "CC BY 4.0"
+  },
+  "fr_FR-siwis-low": {
+    "license": "CC BY 4.0"
+  },
+  "fr_FR-siwis-medium": {
+    "license": "CC BY 4.0"
+  },
+  "fr_FR-tom-medium": {
+    "license": "AGPL-3.0"
+  },
+  "fr_FR-upmc-medium": {
+    "license": "CC BY-SA 4.0"
+  },
+  "he_IL-saspeech-medium": {
+    "license": "See dataset"
+  },
+  "hi_IN-pratham-medium": {
+    "license": "CC BY-NC-SA 4.0",
+    "nonCommercial": true
+  },
+  "hi_IN-priyamvada-medium": {
+    "license": "CC BY-NC-SA 4.0",
+    "nonCommercial": true
+  },
+  "hi_IN-rohan-medium": {
+    "license": "IIT Madras Indic TTS license"
+  },
+  "hu_HU-anna-medium": {
+    "license": "CC0"
+  },
+  "hu_HU-berta-medium": {
+    "license": "CC0"
+  },
+  "hu_HU-imre-medium": {
+    "license": "CC0"
+  },
+  "hy_AM-gor-medium": {
+    "license": "GPL-2.0"
+  },
+  "id_ID-news_tts-medium": {
+    "license": "See dataset"
+  },
+  "is_IS-bui-medium": {
+    "license": "See dataset"
+  },
+  "is_IS-salka-medium": {
+    "license": "See dataset"
+  },
+  "is_IS-steinn-medium": {
+    "license": "See dataset"
+  },
+  "is_IS-ugla-medium": {
+    "license": "See dataset"
+  },
+  "it_IT-paola-medium": {
+    "license": "See dataset"
+  },
+  "it_IT-riccardo-x_low": {
+    "license": "See dataset"
+  },
+  "it_IT-serena-high": {
+    "license": "CC BY 4.0"
+  },
+  "it_IT-serena-medium": {
+    "license": "CC BY 4.0"
+  },
+  "ja_JP-hi_fi_captain-medium": {
+    "license": "CC BY-NC-SA 4.0",
+    "nonCommercial": true
+  },
+  "ka_GE-natia-medium": {
+    "license": "See dataset"
+  },
+  "kk_KZ-iseke-x_low": {
+    "license": "CC BY 4.0"
+  },
+  "kk_KZ-issai-high": {
+    "license": "CC BY 4.0"
+  },
+  "kk_KZ-raya-x_low": {
+    "license": "CC BY 4.0"
+  },
+  "ko_KR-kss-medium": {
+    "license": "CC BY-NC-SA 4.0",
+    "nonCommercial": true
+  },
+  "ku_TR-berfin_renas-medium": {
+    "license": "CC BY-NC 4.0",
+    "nonCommercial": true
+  },
+  "lb_LU-marylux-medium": {
+    "license": "CC BY-NC-SA 4.0",
+    "nonCommercial": true
+  },
+  "lt_LT-ingute-medium": {
+    "license": "NewGenLTU Open RAIL-D 1.0"
+  },
+  "lt_LT-reginute1-medium": {
+    "license": "CC BY 4.0"
+  },
+  "lv_LV-aivars-medium": {
+    "license": "CC0"
+  },
+  "ml_IN-arjun-medium": {
+    "license": "See dataset"
+  },
+  "ml_IN-meera-medium": {
+    "license": "See dataset"
+  },
+  "mr_IN-google-medium": {
+    "license": "CC BY-SA 4.0"
+  },
+  "ne_NP-chitwan-medium": {
+    "license": "CC0"
+  },
+  "ne_NP-google-medium": {
+    "license": "CC BY-SA 4.0"
+  },
+  "ne_NP-google-x_low": {
+    "license": "CC BY-SA 4.0"
+  },
+  "nl_BE-flemishguy-medium": {
+    "license": "CC0"
+  },
+  "nl_BE-nathalie-medium": {
+    "license": "CC0"
+  },
+  "nl_BE-nathalie-x_low": {
+    "license": "CC0"
+  },
+  "nl_BE-rdh-medium": {
+    "license": "CC0"
+  },
+  "nl_BE-rdh-x_low": {
+    "license": "CC0"
+  },
+  "nl_NL-alex-medium": {
+    "license": "CC0"
+  },
+  "nl_NL-mls-medium": {
+    "license": "CC BY 4.0"
+  },
+  "nl_NL-mls_5809-low": {
+    "license": "CC BY 4.0"
+  },
+  "nl_NL-mls_7432-low": {
+    "license": "CC BY 4.0"
+  },
+  "nl_NL-pim-medium": {
+    "license": "CC0"
+  },
+  "nl_NL-ronnie-medium": {
+    "license": "CC0"
+  },
+  "no_NO-nvcc-medium": {
+    "license": "CC0"
+  },
+  "no_NO-talesyntese-medium": {
+    "license": "CC0"
+  },
+  "pl_PL-bass-high": {
+    "license": "Apache 2.0"
+  },
+  "pl_PL-darkman-medium": {
+    "license": "CC0"
+  },
+  "pl_PL-gosia-medium": {
+    "license": "CC0"
+  },
+  "pl_PL-mc_speech-medium": {
+    "license": "CC0"
+  },
+  "pl_PL-mls_6892-low": {
+    "license": "CC BY 4.0"
+  },
+  "pt_BR-cadu-medium": {
+    "license": "CC0"
+  },
+  "pt_BR-edresson-low": {
+    "license": "CC BY 4.0"
+  },
+  "pt_BR-faber-medium": {
+    "license": "CC0"
+  },
+  "pt_BR-jeff-medium": {
+    "license": "CC0"
+  },
+  "pt_PT-tugão-medium": {
+    "license": "CC0"
+  },
+  "ro_RO-mihai-medium": {
+    "license": "CC0"
+  },
+  "ru_RU-denis-medium": {
+    "license": "CC0"
+  },
+  "ru_RU-dmitri-medium": {
+    "license": "CC0"
+  },
+  "ru_RU-irina-medium": {
+    "license": "Unknown"
+  },
+  "ru_RU-ruslan-medium": {
+    "license": "CC BY-NC-SA 4.0",
+    "nonCommercial": true
+  },
+  "sk_SK-lili-medium": {
+    "license": "CC0"
+  },
+  "sl_SI-artur-medium": {
+    "license": "CC BY 4.0"
+  },
+  "sq_AL-edon-medium": {
+    "license": "CC0"
+  },
+  "sr_RS-serbski_institut-medium": {
+    "license": "CC BY-NC-SA 4.0",
+    "nonCommercial": true
+  },
+  "sv_SE-alma-medium": {
+    "license": "CC BY 4.0"
+  },
+  "sv_SE-lisa-medium": {
+    "license": "Not stated"
+  },
+  "sv_SE-nst-medium": {
+    "license": "CC0"
+  },
+  "sw_CD-lanfrica-medium": {
+    "license": "See dataset"
+  },
+  "te_IN-maya-medium": {
+    "license": "IIT Madras Indic TTS license"
+  },
+  "te_IN-padmavathi-medium": {
+    "license": "CC BY 4.0"
+  },
+  "te_IN-venkatesh-medium": {
+    "license": "CC BY 4.0"
+  },
+  "th_TH-tsync2-medium": {
+    "license": "CC BY-NC-SA 3.0",
+    "nonCommercial": true
+  },
+  "tr_TR-dfki-medium": {
+    "license": "CC BY-NC-SA 4.0",
+    "nonCommercial": true
+  },
+  "uk_UA-lada-x_low": {
+    "license": "Apache 2.0"
+  },
+  "uk_UA-mykyta-high": {
+    "license": "Apache 2.0"
+  },
+  "uk_UA-oleksa-high": {
+    "license": "Apache 2.0"
+  },
+  "uk_UA-tetiana-high": {
+    "license": "Apache 2.0"
+  },
+  "uk_UA-ukrainian_tts-medium": {
+    "license": "CC0"
+  },
+  "ur_PK-aegis_female-medium": {
+    "license": "MIT"
+  },
+  "ur_PK-fasih-medium": {
+    "license": "MIT"
+  },
+  "vi_VN-25hours_single-low": {
+    "license": "Unknown"
+  },
+  "vi_VN-vais1000-medium": {
+    "license": "CC BY 4.0"
+  },
+  "vi_VN-vivos-x_low": {
+    "license": "CC BY-NC-SA 4.0",
+    "nonCommercial": true
+  },
+  "zh_CN-chaowen-medium": {
+    "license": "CC0"
+  },
+  "zh_CN-huayan-medium": {
+    "license": "Unknown"
+  },
+  "zh_CN-huayan-x_low": {
+    "license": "Unknown"
+  },
+  "zh_CN-xiao_ya-medium": {
+    "license": "DataBaker non-commercial license",
+    "nonCommercial": true
+  }
+}
