@@ -157,6 +157,7 @@ function App() {
               <tr>
                 <th>Voice Pack</th>
                 <th>Language</th>
+                <th>License</th>
                 <th>Status</th>
                 <th></th>
                 <th style={{width: "0%"}}></th>
@@ -175,7 +176,6 @@ function App() {
                       <span style={{cursor: "pointer"}}
                         onClick={() => toggleExpanded(voice.key)}>({voice.num_speakers} voices) {state.isExpanded[voice.key] ? '▲' : '▼'}</span>
                     }
-                    <VoiceLicense voice={voice} />
                     {state.isExpanded[voice.key] &&
                       <ul>
                         {Object.entries(voice.speaker_id_map).map(([speakerName, speakerId]) =>
@@ -188,6 +188,7 @@ function App() {
                     }
                   </td>
                   <td className="align-top">{voice.language.name_native} ({voice.language.country_english})</td>
+                  <td className="align-top"><VoiceLicense voice={voice} /></td>
                   <td className="align-top">
                     {immediate(() => {
                       if (voice.numActiveUsers) return <span style={{fontWeight: "bold"}}>(in use)</span>
@@ -231,6 +232,7 @@ function App() {
             <thead>
               <tr>
                 <th>Voice Pack</th>
+                <th>License</th>
                 <th>Popularity</th>
                 <th></th>
                 <th style={{width: "0%"}}></th>
@@ -249,7 +251,6 @@ function App() {
                       <span style={{cursor: "pointer"}}
                         onClick={() => toggleExpanded(voice.key)}>({voice.num_speakers} voices) {state.isExpanded[voice.key] ? '▲' : '▼'}</span>
                     }
-                    <VoiceLicense voice={voice} />
                     {state.isExpanded[voice.key] &&
                       <ul>
                         {voice.speakerList.map(({speakerName, speakerId}) =>
@@ -261,6 +262,7 @@ function App() {
                       </ul>
                     }
                   </td>
+                  <td className="align-top"><VoiceLicense voice={voice} /></td>
                   <td className="align-top">
                     <div>{state.popularity[voice.key] ?? "\u00A0"}</div>
                     {state.isExpanded[voice.key] &&
@@ -326,7 +328,7 @@ function App() {
                   preferred choices among users.
                 </p>
                 <p>
-                  Each voice has its own license, shown next to its name and linked to its model card.
+                  Each voice has its own license, shown in the License column and linked to its model card.
                   Generated audio may be subject to the voice's license.
                 </p>
               </div>
@@ -687,9 +689,7 @@ function VoiceLicense({voice}: {voice: MyVoice}) {
   if (!cardFile) return null
   const license = (voiceLicenses as Record<string, string>)[voice.key] ?? "license"
   return (
-    <span className="text-muted small ms-2">
-      <a target="_blank" href={config.repoUrl + cardFile} className="muted-link" title="Voice license (model card)">{license}</a>
-    </span>
+    <a target="_blank" href={config.repoUrl + cardFile} title="Voice license (model card)">{license}</a>
   )
 }
 
