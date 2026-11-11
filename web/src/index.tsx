@@ -150,7 +150,6 @@ function App() {
               <tr>
                 <th>Voice Pack</th>
                 <th>Language</th>
-                <th>License</th>
                 <th>Status</th>
                 <th></th>
                 <th style={{width: "0%"}}></th>
@@ -169,6 +168,7 @@ function App() {
                       <span style={{cursor: "pointer"}}
                         onClick={() => toggleExpanded(voice.key)}>({voice.num_speakers} voices) {state.isExpanded[voice.key] ? '▲' : '▼'}</span>
                     }
+                    <VoiceLicense voice={voice} />
                     {state.isExpanded[voice.key] &&
                       <ul>
                         {Object.entries(voice.speaker_id_map).map(([speakerName, speakerId]) =>
@@ -181,7 +181,6 @@ function App() {
                     }
                   </td>
                   <td className="align-top">{voice.language.name_native} ({voice.language.country_english})</td>
-                  <td className="align-top"><VoiceLicense voice={voice} /></td>
                   <td className="align-top">
                     {immediate(() => {
                       if (voice.numActiveUsers) return <span style={{fontWeight: "bold"}}>(in use)</span>
@@ -206,19 +205,12 @@ function App() {
 
       <div>
         <h2 className="text-muted">Available to Install</h2>
-        <p className="text-muted small">
-          The License column shows the license of the recordings each voice was trained on, as stated in
-          its model card. Many voices are fine-tuned from another voice whose terms may also apply.
-          Review a voice's model card before using its audio commercially or sharing it.
-          See <span className="link" onClick={() => stateUpdater(draft => {draft.showInfoBox = true})}>What is Piper?</span> for details.
-        </p>
         {notInstalled.length > 0 &&
           <table className="table table-borderless table-hover table-sm">
             <thead>
               <tr>
                 <th>Voice Pack</th>
                 <th>Language</th>
-                <th>License</th>
                 <th>Popularity</th>
                 <th></th>
                 <th style={{width: "0%"}}></th>
@@ -237,6 +229,7 @@ function App() {
                       <span style={{cursor: "pointer"}}
                         onClick={() => toggleExpanded(voice.key)}>({voice.num_speakers} voices) {state.isExpanded[voice.key] ? '▲' : '▼'}</span>
                     }
+                    <VoiceLicense voice={voice} />
                     {state.isExpanded[voice.key] &&
                       <ul>
                         {voice.speakerList.map(({speakerName, speakerId}) =>
@@ -249,7 +242,6 @@ function App() {
                     }
                   </td>
                   <td className="align-top">{voice.language.name_native} ({voice.language.country_english})</td>
-                  <td className="align-top"><VoiceLicense voice={voice} /></td>
                   <td className="align-top">
                     <div>{state.popularity[voice.key] ?? "\u00A0"}</div>
                     {state.isExpanded[voice.key] &&
@@ -315,22 +307,8 @@ function App() {
                   preferred choices among users.
                 </p>
                 <p>
-                  Each voice has its own license.
-                  The Piper Project grants no license of its own over the voices; their terms come from the
-                  recordings they were trained on and from the people who trained them.
-                  The License column summarizes the dataset license stated in each voice's model card.
-                  Many voices are fine-tuned from another voice, often the English "lessac" voice, whose recordings
-                  are licensed for research only, so a base voice's terms may also apply.
-                  Voices marked non-commercial must not be used for commercial purposes.
-                  See Piper's <a target="_blank" href="https://github.com/OHF-Voice/piper1-gpl/blob/main/docs/LICENSING.md">voice licensing</a> guide
-                  and its list of voices <a target="_blank" href="https://github.com/OHF-Voice/piper1-gpl/blob/main/docs/COMMERCIAL_USE.md">suitable for commercial use</a>.
-                  The license information shown here is provided for convenience, may be incomplete or out of date,
-                  and is not legal advice.
-                </p>
-                <p>
-                  Do not use these voices to impersonate anyone, or use generated audio to deceive, defraud,
-                  or harm others.
-                  Your use of this page is subject to our <a target="_blank" href="https://readaloud.app/tos.html">Terms of Service</a>.
+                  Each voice has its own license, shown next to its name and linked to its model card.
+                  Generated audio may be subject to the voice's license.
                 </p>
               </div>
             </div>
@@ -647,19 +625,13 @@ function App() {
 
 
 function VoiceLicense({voice}: {voice: MyVoice}) {
-  const info = (voiceLicenses as Record<string, {license: string, nonCommercial?: boolean}>)[voice.key]
   const cardFile = Object.keys(voice.files).find(x => x.endsWith("/MODEL_CARD"))
-  const label = info?.license ?? "See model card"
+  if (!cardFile) return null
+  const license = (voiceLicenses as Record<string, string>)[voice.key] ?? "license"
   return (
-    <>
-      {cardFile
-        ? <a target="_blank" href={config.repoUrl + cardFile} title="Open model card">{label}</a>
-        : <span>{label}</span>
-      }
-      {info?.nonCommercial &&
-        <span className="badge text-bg-warning ms-1" title="This voice's training data is not licensed for commercial use">non-commercial</span>
-      }
-    </>
+    <span className="text-muted small ms-2">
+      <a target="_blank" href={config.repoUrl + cardFile} className="muted-link" title="Voice license (model card)">{license}</a>
+    </span>
   )
 }
 

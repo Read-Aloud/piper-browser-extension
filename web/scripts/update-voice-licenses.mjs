@@ -15,17 +15,14 @@ const outFile = new URL("../src/voice-licenses.json", import.meta.url)
 // Voices whose card can't be read mechanically, or needs a clarification.
 const OVERRIDES = {
   "bn_BD-google-medium": "CC BY-SA 4.0",
-  "es_MX-ald-x_low": "Not stated",
+  "es_MX-ald-x_low": "License not stated",
   "lt_LT-ingute-medium": "NewGenLTU Open RAIL-D 1.0",
   "pl_PL-bass-high": "Apache 2.0",
   "sv_SE-alma-medium": "CC BY 4.0",
-  "sv_SE-lisa-medium": "Not stated",
+  "sv_SE-lisa-medium": "License not stated",
   "ur_PK-aegis_female-medium": "MIT",
   "ur_PK-fasih-medium": "MIT",
 }
-
-// License labels whose terms exclude commercial use.
-const NON_COMMERCIAL = /\bNC\b|non-commercial|Lessac Blizzard/i
 
 function normalize(text) {
   const t = text.replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/\(.*?\)/g, "").trim().replace(/\/?(deed\.\w+)?$/, "")
@@ -48,8 +45,8 @@ function normalize(text) {
     [/lessac_blizzard2013/i, "Lessac Blizzard 2013"],
     [/indictts/i, "IIT Madras Indic TTS license"],
     [/^non-commercial use/i, "DataBaker non-commercial license"],
-    [/^unknown$/i, "Unknown"],
-    [/^see\b/i, "See dataset"],
+    [/^unknown$/i, "License unknown"],
+    [/^see\b/i, "See license"],
   ]
   for (const [re, label] of rules) if (re.test(t)) return label
   return null
@@ -75,10 +72,7 @@ await Promise.all(Object.values(voices).map(async voice => {
     license = line ? normalize(line) : null
     if (!license) problems.push(`${voice.key}: unrecognized license ${JSON.stringify(line ?? null)}`)
   }
-  result[voice.key] = {
-    license: license ?? "See dataset",
-    ...(NON_COMMERCIAL.test(license ?? "") ? {nonCommercial: true} : {}),
-  }
+  result[voice.key] = license ?? "See license"
 }))
 
 const sorted = Object.fromEntries(Object.keys(result).sort().map(k => [k, result[k]]))
