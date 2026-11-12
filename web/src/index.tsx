@@ -4,7 +4,7 @@ import { useImmer } from "use-immer"
 import { playAudio } from "./audio"
 import config from "./config"
 import { appVersion } from "./version"
-import { advertiseVoices, deleteVoice, getPopularity, getVoiceList, getSpeakerMetadata, installVoice, makeAdvertisedVoiceList, messageDispatcher, parseAdvertisedVoiceName, sampler, updateStats } from "./services"
+import { advertiseVoices, deleteVoice, getPopularity, getVoiceList, getSpeakerMetadata, installVoice, makeAdvertisedVoiceList, messageDispatcher, resolveAdvertisedVoice, sampler, updateStats } from "./services"
 import { makeSpeech } from "./speech"
 import * as storage from "./storage"
 import { makeSynthesizer } from "./synthesizer"
@@ -480,9 +480,7 @@ function App() {
     playAudio: PlayAudio,
     callback(method: string, args?: Record<string, unknown>): void
   }) {
-    const {modelId, speakerName} = parseAdvertisedVoiceName(voiceName)
-    const voice = state.voiceList!.find(({key}) => key.endsWith('-' + modelId))
-    if (!voice) throw new Error("Voice not found")
+    const {voice, speakerName} = resolveAdvertisedVoice(state.voiceList!, voiceName)
 
     const speakerId = immediate(() => {
       if (speakerName) {

@@ -94,3 +94,41 @@ test('absent model speaker map falls back to catalog on reload and installation'
   assert.equal(metadata.speaker_id_map['17'], 348)
   assert.equal(metadata.speakerList.length, 2)
 })
+
+const googleVoices = [
+  ['bn_BD', 'বাংলা', '00737'],
+  ['mr_IN', 'मराठी, 𑘦𑘨𑘰𑘙𑘲', 'mrt_01523'],
+  ['ne_NP', 'नेपाली', '0546'],
+].map(([code, name_native, speaker]) => ({
+  key: `${code}-google-medium`, language: {code, name_native},
+  speaker_id_map: {[speaker]: 0}, installState: 'installed',
+}))
+
+test('colliding suffixes round-trip advertised names regardless of catalog order', () => {
+  const services = loadServices(new Map())
+  for (const voice of googleVoices) {
+    const [advertised] = services.makeAdvertisedVoiceList([voice])
+    for (const list of [googleVoices, [...googleVoices].reverse()]) {
+      const result = services.resolveAdvertisedVoice(list, advertised.voiceName)
+      assert.equal(result.voice, voice)
+      assert.equal(result.speakerName, Object.keys(voice.speaker_id_map)[0])
+    }
+  }
+})
+
+test('unique suffix preserves legacy single and multi-speaker matching despite label changes', () => {
+  const services = loadServices(new Map())
+  const single = {key: 'en_US-lessac-medium', language: {name_native: 'English'}}
+  assert.equal(services.resolveAdvertisedVoice([single], 'Piper lessac-medium (Old label)').voice, single)
+  assert.equal(services.resolveAdvertisedVoice([single], 'Piper lessac-medium (Old label)').speakerName, undefined)
+  const result = services.resolveAdvertisedVoice([catalogVoice], 'Piper libritts_r-medium 17 (Old label)')
+  assert.equal(result.voice, catalogVoice)
+  assert.equal(result.speakerName, '17')
+})
+
+test('unknown or ambiguous language labels never select the first collision', () => {
+  const services = loadServices(new Map())
+  assert.throws(() => services.resolveAdvertisedVoice(googleVoices, 'Piper google-medium 0546 (Unknown)'), /Voice not found/)
+  assert.throws(() => services.resolveAdvertisedVoice([], 'Piper missing-medium (English)'), /Voice not found/)
+  assert.throws(() => services.resolveAdvertisedVoice([googleVoices[0], {...googleVoices[0], key: 'bn_IN-google-medium'}], 'Piper google-medium 00737 (বাংলা)'), /Ambiguous voice name/)
+})

@@ -142,6 +142,18 @@ export function parseAdvertisedVoiceName(name: string): {modelId: string, speake
 }
 
 
+export function resolveAdvertisedVoice(voiceList: readonly MyVoice[], name: string) {
+  const {modelId, speakerName} = parseAdvertisedVoiceName(name)
+  const candidates = voiceList.filter(({key}) => key.endsWith('-' + modelId))
+  // Preserve legacy matching for unique model suffixes, even if a label changed.
+  const matches = candidates.length <= 1 ? candidates : candidates.filter(voice =>
+    name.endsWith(` (${voice.language.name_native})`))
+  if (!matches.length) throw new Error("Voice not found")
+  if (matches.length > 1) throw new Error("Ambiguous voice name")
+  return {voice: matches[0], speakerName}
+}
+
+
 export const sampler = immediate(() => {
   const audio = new Audio()
   audio.crossOrigin = "anonymous"
