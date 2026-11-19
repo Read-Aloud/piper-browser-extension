@@ -153,12 +153,14 @@ function App() {
           <div className="text-muted">Installed voices will appear here</div>
         }
         {installed.length > 0 &&
+          <div className="table-responsive">
           <table className="table table-borderless table-hover table-sm">
             <thead>
               <tr>
                 <th>Voice Pack</th>
                 <th>Language</th>
                 <th>License</th>
+                <th title="Popularity">Pop.</th>
                 <th>Status</th>
                 <th></th>
                 <th style={{width: "0%"}}></th>
@@ -181,6 +183,7 @@ function App() {
                     </td>
                     <td>{voice.language.name_native} ({voice.language.country_english})</td>
                     <td><VoiceLicense voice={voice} /></td>
+                    <td>{state.popularity[voice.key]}</td>
                     <td>
                       {immediate(() => {
                         if (voice.numActiveUsers) return <span style={{fontWeight: "bold"}}>(in use)</span>
@@ -206,6 +209,7 @@ function App() {
                         </td>
                         <td></td>
                         <td></td>
+                        <td>{state.popularity[voice.key + speakerName]}</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -216,6 +220,7 @@ function App() {
               )}
             </tbody>
           </table>
+          </div>
         }
       </div>
 
@@ -249,7 +254,7 @@ function App() {
         <div className="d-flex align-items-center flex-wrap">
           <h2 className="text-muted me-3">Available to Install</h2>
           {languages.length > 0 &&
-            <select className="form-select form-select-sm w-auto mb-2" aria-label="Language"
+            <select className="form-select form-select-sm w-auto mb-2" style={{maxWidth: "100%"}} aria-label="Language"
               value={effectiveLang ?? ""}
               onChange={event => {
                 setSelectedLang(event.target.value)
@@ -262,12 +267,13 @@ function App() {
           }
         </div>
         {notInstalled.length > 0 &&
+          <div className="table-responsive">
           <table className="table table-borderless table-hover table-sm">
             <thead>
               <tr>
                 <th>Voice Pack</th>
                 <th>License</th>
-                <th>Popularity</th>
+                <th title="Popularity">Pop.</th>
                 <th></th>
                 <th style={{width: "0%"}}></th>
               </tr>
@@ -312,6 +318,7 @@ function App() {
               )}
             </tbody>
           </table>
+          </div>
         }
       </div>
 
