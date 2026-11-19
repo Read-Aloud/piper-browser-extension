@@ -166,46 +166,53 @@ function App() {
             </thead>
             <tbody>
               {installed.map(voice =>
-                <tr key={voice.key}>
-                  <td>
-                    <span className="me-1">{voice.name}</span>
-                    <span className="me-1">[{voice.quality}]</span>
-                    {voice.num_speakers <= 1 &&
-                      <span className="link" onClick={() => sampler.play(voice)}>sample</span>
-                    }
-                    {voice.num_speakers > 1 &&
-                      <span style={{cursor: "pointer"}}
-                        onClick={() => toggleExpanded(voice.key)}>({voice.num_speakers} voices) {state.isExpanded[voice.key] ? '▲' : '▼'}</span>
-                    }
-                    {state.isExpanded[voice.key] &&
-                      <ul>
-                        {Object.entries(voice.speaker_id_map).map(([speakerName, speakerId]) =>
-                          <li key={speakerId}>
-                            <span className="me-1">{speakerName}</span>
-                            <span className="link" onClick={() => sampler.play(voice, speakerId)}>sample</span>
-                          </li>
-                        )}
-                      </ul>
-                    }
-                  </td>
-                  <td className="align-top">{voice.language.name_native} ({voice.language.country_english})</td>
-                  <td className="align-top"><VoiceLicense voice={voice} /></td>
-                  <td className="align-top">
-                    {immediate(() => {
-                      if (voice.numActiveUsers) return <span style={{fontWeight: "bold"}}>(in use)</span>
-                      switch (voice.loadState) {
-                        case "not-loaded": return "(on disk)"
-                        case "loading": return <span style={{fontWeight: "bold", color: "red"}}>(loading)</span>
-                        case "loaded": return "(in memory)"
+                <React.Fragment key={voice.key}>
+                  <tr>
+                    <td>
+                      <span className="me-1">{voice.name}</span>
+                      <span className="me-1">[{voice.quality}]</span>
+                      {voice.num_speakers <= 1 &&
+                        <span className="link" onClick={() => sampler.play(voice)}>sample</span>
                       }
-                    })}
-                  </td>
-                  <td className="align-top text-end">{(voice.modelFileSize /1e6).toFixed(1)}MB</td>
-                  <td className="align-top text-end ps-2">
-                    <button type="button" className="btn btn-danger btn-sm"
-                      onClick={() => onDelete(voice.key)}>Delete</button>
-                  </td>
-                </tr>
+                      {voice.num_speakers > 1 &&
+                        <span style={{cursor: "pointer"}}
+                          onClick={() => toggleExpanded(voice.key)}>({voice.num_speakers} voices) {state.isExpanded[voice.key] ? '▲' : '▼'}</span>
+                      }
+                    </td>
+                    <td>{voice.language.name_native} ({voice.language.country_english})</td>
+                    <td><VoiceLicense voice={voice} /></td>
+                    <td>
+                      {immediate(() => {
+                        if (voice.numActiveUsers) return <span style={{fontWeight: "bold"}}>(in use)</span>
+                        switch (voice.loadState) {
+                          case "not-loaded": return "(on disk)"
+                          case "loading": return <span style={{fontWeight: "bold", color: "red"}}>(loading)</span>
+                          case "loaded": return "(in memory)"
+                        }
+                      })}
+                    </td>
+                    <td className="text-end">{(voice.modelFileSize /1e6).toFixed(1)}MB</td>
+                    <td className="text-end ps-2">
+                      <button type="button" className="btn btn-danger btn-sm"
+                        onClick={() => onDelete(voice.key)}>Delete</button>
+                    </td>
+                  </tr>
+                  {state.isExpanded[voice.key] &&
+                    voice.speakerList.map(({speakerName, speakerId}) =>
+                      <tr key={speakerName}>
+                        <td className="ps-4">
+                          <span className="me-1">{speakerName}</span>
+                          <span className="link" onClick={() => sampler.play(voice, speakerId)}>sample</span>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    )
+                  }
+                </React.Fragment>
               )}
             </tbody>
           </table>
@@ -267,42 +274,41 @@ function App() {
             </thead>
             <tbody>
               {notInstalled.map(voice =>
-                <tr key={voice.key}>
-                  <td>
-                    <span className="me-1">{voice.name}</span>
-                    <span className="me-1">[{voice.quality}]</span>
-                    {voice.num_speakers <= 1 &&
-                      <span className="link" onClick={() => sampler.play(voice)}>sample</span>
-                    }
-                    {voice.num_speakers > 1 &&
-                      <span style={{cursor: "pointer"}}
-                        onClick={() => toggleExpanded(voice.key)}>({voice.num_speakers} voices) {state.isExpanded[voice.key] ? '▲' : '▼'}</span>
-                    }
-                    {state.isExpanded[voice.key] &&
-                      <ul>
-                        {voice.speakerList.map(({speakerName, speakerId}) =>
-                          <li key={speakerName}>
-                            <span className="me-1">{speakerName}</span>
-                            <span className="link" onClick={() => sampler.play(voice, speakerId)}>sample</span>
-                          </li>
-                        )}
-                      </ul>
-                    }
-                  </td>
-                  <td className="align-top"><VoiceLicense voice={voice} /></td>
-                  <td className="align-top">
-                    <div>{state.popularity[voice.key] ?? "\u00A0"}</div>
-                    {state.isExpanded[voice.key] &&
-                      voice.speakerList.map(({speakerName}) =>
-                        <div key={speakerName}>{state.popularity[voice.key + speakerName] ?? "\u00A0"}</div>
-                      )
-                    }
-                  </td>
-                  <td className="align-top text-end">{(voice.modelFileSize /1e6).toFixed(1)}MB</td>
-                  <td className="align-top text-end ps-2">
-                    <InstallButton voice={voice} onInstall={onInstall} />
-                  </td>
-                </tr>
+                <React.Fragment key={voice.key}>
+                  <tr>
+                    <td>
+                      <span className="me-1">{voice.name}</span>
+                      <span className="me-1">[{voice.quality}]</span>
+                      {voice.num_speakers <= 1 &&
+                        <span className="link" onClick={() => sampler.play(voice)}>sample</span>
+                      }
+                      {voice.num_speakers > 1 &&
+                        <span style={{cursor: "pointer"}}
+                          onClick={() => toggleExpanded(voice.key)}>({voice.num_speakers} voices) {state.isExpanded[voice.key] ? '▲' : '▼'}</span>
+                      }
+                    </td>
+                    <td><VoiceLicense voice={voice} /></td>
+                    <td>{state.popularity[voice.key]}</td>
+                    <td className="text-end">{(voice.modelFileSize /1e6).toFixed(1)}MB</td>
+                    <td className="text-end ps-2">
+                      <InstallButton voice={voice} onInstall={onInstall} />
+                    </td>
+                  </tr>
+                  {state.isExpanded[voice.key] &&
+                    voice.speakerList.map(({speakerName, speakerId}) =>
+                      <tr key={speakerName}>
+                        <td className="ps-4">
+                          <span className="me-1">{speakerName}</span>
+                          <span className="link" onClick={() => sampler.play(voice, speakerId)}>sample</span>
+                        </td>
+                        <td></td>
+                        <td>{state.popularity[voice.key + speakerName]}</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    )
+                  }
+                </React.Fragment>
               )}
             </tbody>
           </table>
