@@ -8,6 +8,8 @@ import { lazy, makeBatchProcessor, wait } from "./utils"
 interface SpeakOptions {
   readonly speakerId: number|undefined,
   readonly text: string,
+  readonly sentenceSilenceSeconds: number
+  readonly paragraphSilenceSeconds: number
   playAudio: PlayAudio
 }
 
@@ -220,7 +222,7 @@ function makeSentences(
         return phrases.map<MyPhrase>((phrase, index) => ({
           phonemeIds: phrase.phonemeIds,
           phonemes: phrase.phonemes,
-          silenceSeconds: index == phrases.length-1 && /\n\s*$/.test(text) ? config.paragraphSilenceSeconds : phrase.silenceSeconds,
+          silenceSeconds: index == phrases.length-1 && /\n\s*$/.test(text) ? opts.paragraphSilenceSeconds : opts.sentenceSilenceSeconds,
           getPcmData: lazy(() => synth.synthesize(phrase, opts.speakerId))
         }))
       })
