@@ -160,7 +160,7 @@ function App() {
                 <th>Voice Pack</th>
                 <th>Language</th>
                 <th>License</th>
-                <th title="Popularity">Pop.</th>
+                <th><abbr className="tip" data-tip="Popularity" aria-label="Popularity">Pop.</abbr></th>
                 <th>Status</th>
                 <th></th>
                 <th style={{width: "0%"}}></th>
@@ -273,7 +273,7 @@ function App() {
               <tr>
                 <th>Voice Pack</th>
                 <th>License</th>
-                <th title="Popularity">Pop.</th>
+                <th><abbr className="tip" data-tip="Popularity" aria-label="Popularity">Pop.</abbr></th>
                 <th></th>
                 <th style={{width: "0%"}}></th>
               </tr>
