@@ -41,6 +41,7 @@ function App() {
     return [...map.values()].sort((a, b) => languageLabel(a).localeCompare(languageLabel(b)))
   }, [state.voiceList])
   const [selectedLang, setSelectedLang] = React.useState(loadSelectedLang)
+  const [pauses, setPauses] = React.useState(loadPauses)
   const effectiveLang = React.useMemo(() => pickLanguage(selectedLang, languages), [selectedLang, languages])
   const notInstalled = React.useMemo(() => state.voiceList?.filter(x => x.installState != "installed" && x.language.code == effectiveLang) ?? [], [state.voiceList, effectiveLang])
   const advertised = React.useMemo(() => makeAdvertisedVoiceList(state.voiceList), [state.voiceList])
@@ -210,6 +211,32 @@ function App() {
           </table>
         }
       </div>
+
+      {installed.length > 0 &&
+        <div>
+          <h2 className="text-muted">Options</h2>
+          <fieldset disabled={installed.some(x => x.numActiveUsers)}>
+            {([
+              ['sentenceSilenceSeconds', 'Pause between sentences'],
+              ['paragraphSilenceSeconds', 'Pause between paragraphs'],
+            ] as const).map(([key, label], index) =>
+              <div key={key} className={"d-flex align-items-center" + (index ? " mt-2" : "")}>
+                <label htmlFor={key} className="me-2" style={{minWidth: '14em'}}>{label}</label>
+                <input type="number" id={key} className="form-control form-control-sm" style={{width: '6em'}}
+                  min={0} max={5} step={0.05} value={pauses[key]}
+                  onChange={e => {
+                    const value = e.target.valueAsNumber
+                    if (isNaN(value) || value < 0 || value > 5) return
+                    const next = {...pauses, [key]: value}
+                    setPauses(next)
+                    savePauses(next)
+                  }} />
+                <span className="ms-1">s</span>
+              </div>
+            )}
+          </fieldset>
+        </div>
+      }
 
       <div>
         <div className="d-flex align-items-center flex-wrap">
@@ -499,7 +526,7 @@ function App() {
     })
 
     currentSpeech?.cancel()
-    const speech = currentSpeech = makeSpeech(synth, {speakerId, text, playAudio}, {
+    const speech = currentSpeech = makeSpeech(synth, {speakerId, text, ...pauses, playAudio}, {
       onSentence(startIndex, endIndex) {
         notifyCaller("onSentence", {startIndex, endIndex})
       }
@@ -646,6 +673,28 @@ function App() {
 function languageLabel(lang: MyVoice["language"]) {
   const label = `${lang.name_english} (${lang.country_english})`
   return lang.name_native == lang.name_english ? label : `${label} - ${lang.name_native}`
+}
+
+//pause settings persist in localStorage, which may be unavailable
+function loadPauses() {
+  const defaults = {
+    sentenceSilenceSeconds: config.sentenceSilenceSeconds,
+    paragraphSilenceSeconds: config.paragraphSilenceSeconds,
+  }
+  try {
+    const saved = JSON.parse(localStorage.getItem("pauses") ?? "null")
+    if (saved && typeof saved.sentenceSilenceSeconds == "number" && typeof saved.paragraphSilenceSeconds == "number")
+      return {sentenceSilenceSeconds: saved.sentenceSilenceSeconds, paragraphSilenceSeconds: saved.paragraphSilenceSeconds}
+  }
+  catch {}
+  return defaults
+}
+
+function savePauses(pauses: ReturnType<typeof loadPauses>) {
+  try {
+    localStorage.setItem("pauses", JSON.stringify(pauses))
+  }
+  catch {}
 }
 
 function loadSelectedLang(): string|null {
