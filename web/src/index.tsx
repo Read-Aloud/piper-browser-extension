@@ -158,10 +158,8 @@ function App() {
             <thead>
               <tr>
                 <th>Voice Pack</th>
-                <th>Language</th>
                 <th>License</th>
-                <th title="Popularity">Pop.</th>
-                <th>Status</th>
+                <th>Popularity</th>
                 <th></th>
                 <th style={{width: "0%"}}></th>
               </tr>
@@ -172,29 +170,31 @@ function App() {
                   <tr>
                     <td>
                       <span className="me-1">{voice.name}</span>
-                      <span className="me-1">[{voice.quality}]</span>
+                      <span className="me-1">[{voice.quality}]</span><wbr/>
                       {voice.num_speakers <= 1 &&
                         <span className="link" onClick={() => sampler.play(voice)}>sample</span>
                       }
                       {voice.num_speakers > 1 &&
-                        <span style={{cursor: "pointer"}}
+                        <span className="text-nowrap" style={{cursor: "pointer"}}
                           onClick={() => toggleExpanded(voice.key)}>({voice.num_speakers} voices) {state.isExpanded[voice.key] ? '▲' : '▼'}</span>
                       }
+                      <div className="text-muted small">{voice.language.name_native} ({voice.language.country_english})</div>
                     </td>
-                    <td>{voice.language.name_native} ({voice.language.country_english})</td>
                     <td><VoiceLicense voice={voice} /></td>
                     <td>{state.popularity[voice.key]}</td>
-                    <td>
-                      {immediate(() => {
-                        if (voice.numActiveUsers) return <span style={{fontWeight: "bold"}}>(in use)</span>
-                        switch (voice.loadState) {
-                          case "not-loaded": return "(on disk)"
-                          case "loading": return <span style={{fontWeight: "bold", color: "red"}}>(loading)</span>
-                          case "loaded": return "(in memory)"
-                        }
-                      })}
+                    <td className="text-end">
+                      {(voice.modelFileSize /1e6).toFixed(1)}MB
+                      <div className="text-muted small text-nowrap">
+                        {immediate(() => {
+                          if (voice.numActiveUsers) return <span style={{fontWeight: "bold"}}>(in use)</span>
+                          switch (voice.loadState) {
+                            case "not-loaded": return "(on disk)"
+                            case "loading": return <span style={{fontWeight: "bold", color: "red"}}>(loading)</span>
+                            case "loaded": return "(in memory)"
+                          }
+                        })}
+                      </div>
                     </td>
-                    <td className="text-end">{(voice.modelFileSize /1e6).toFixed(1)}MB</td>
                     <td className="text-end ps-2">
                       <button type="button" className="btn btn-danger btn-sm"
                         onClick={() => onDelete(voice.key)}>Delete</button>
@@ -204,13 +204,11 @@ function App() {
                     voice.speakerList.map(({speakerName, speakerId}) =>
                       <tr key={speakerName}>
                         <td className="ps-4">
-                          <span className="me-1">{speakerName}</span>
+                          <span className="me-1">{speakerName}</span><wbr/>
                           <span className="link" onClick={() => sampler.play(voice, speakerId)}>sample</span>
                         </td>
                         <td></td>
-                        <td></td>
                         <td>{state.popularity[voice.key + speakerName]}</td>
-                        <td></td>
                         <td></td>
                         <td></td>
                       </tr>
@@ -273,7 +271,7 @@ function App() {
               <tr>
                 <th>Voice Pack</th>
                 <th>License</th>
-                <th title="Popularity">Pop.</th>
+                <th>Popularity</th>
                 <th></th>
                 <th style={{width: "0%"}}></th>
               </tr>
@@ -284,12 +282,12 @@ function App() {
                   <tr>
                     <td>
                       <span className="me-1">{voice.name}</span>
-                      <span className="me-1">[{voice.quality}]</span>
+                      <span className="me-1">[{voice.quality}]</span><wbr/>
                       {voice.num_speakers <= 1 &&
                         <span className="link" onClick={() => sampler.play(voice)}>sample</span>
                       }
                       {voice.num_speakers > 1 &&
-                        <span style={{cursor: "pointer"}}
+                        <span className="text-nowrap" style={{cursor: "pointer"}}
                           onClick={() => toggleExpanded(voice.key)}>({voice.num_speakers} voices) {state.isExpanded[voice.key] ? '▲' : '▼'}</span>
                       }
                     </td>
@@ -304,7 +302,7 @@ function App() {
                     voice.speakerList.map(({speakerName, speakerId}) =>
                       <tr key={speakerName}>
                         <td className="ps-4">
-                          <span className="me-1">{speakerName}</span>
+                          <span className="me-1">{speakerName}</span><wbr/>
                           <span className="link" onClick={() => sampler.play(voice, speakerId)}>sample</span>
                         </td>
                         <td></td>
